@@ -1,9 +1,4 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
-
-export default new Vuex.Store({
+export default {
     state: {
         ads: [
             {
@@ -38,13 +33,13 @@ export default new Vuex.Store({
         ads(state) {
             return state.ads
         },
-        promoAds(state) {
+        promoAds(state){
             return state.ads.filter(ad => {
                 return ad.promo
             })
         },
-        myAds(state) {
+        myAds(state){
             return state.ads
         }
     }
-})
+}
