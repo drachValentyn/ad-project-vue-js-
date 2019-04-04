@@ -78,12 +78,15 @@
         },
         methods: {
             CreateAd() {
-                if (this.$refs.validate()){
+                if (this.$refs.form.validate()){
                     const ad = {
                         title: this.title,
                         description: this.description,
-                        promo: this.promo
+                        promo: this.promo,
+                        imageSrc: 'https://proglib.io/wp-content/uploads/2018/07/1_qnI8K0Udjw4lciWDED4HGw.png'
                     }
+
+                    this.$store.dispatch('createAd', ad)
                 }
 
             }
