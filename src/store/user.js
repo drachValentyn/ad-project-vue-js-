@@ -46,7 +46,7 @@ export default {
             }
         },
         autoLoginUser({commit}, payload) {
-            commit('setUser', new User(payload.id))
+            commit('setUser', new User(payload.uid))
 
         },
         logoutUser({commit}) {

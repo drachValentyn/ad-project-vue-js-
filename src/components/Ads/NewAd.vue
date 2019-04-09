@@ -53,10 +53,12 @@
                     <v-flex xs12>
                         <v-spacer></v-spacer>
                         <v-btn
-                                :disabled="!valid"
+                                :loading="loading"
+                                :disabled="!valid || loading"
                                 class="success"
                                 @click="CreateAd"
-                        >Create Ad</v-btn>
+                        >Create Ad
+                        </v-btn>
                     </v-flex>
                 </v-layout>
 
@@ -66,32 +68,41 @@
 </template>
 
 <script>
-    export default {
-        data () {
-            return{
-                title: '',
-                description: '',
-                promo: false,
-                valid: false
+  export default {
+    data () {
+      return {
+        title: '',
+        description: '',
+        promo: false,
+        valid: false
 
-            }
-        },
-        methods: {
-            CreateAd() {
-                if (this.$refs.form.validate()){
-                    const ad = {
-                        title: this.title,
-                        description: this.description,
-                        promo: this.promo,
-                        imageSrc: 'https://proglib.io/wp-content/uploads/2018/07/1_qnI8K0Udjw4lciWDED4HGw.png'
-                    }
+      }
+    },
+    computed: {
+      loading () {
+        return this.$store.getters.loading
+      }
+    },
+    methods: {
+      CreateAd () {
+        if (this.$refs.form.validate()) {
+          const ad = {
+            title: this.title,
+            description: this.description,
+            promo: this.promo,
+            imageSrc: 'https://proglib.io/wp-content/uploads/2018/07/1_qnI8K0Udjw4lciWDED4HGw.png'
+          }
 
-                    this.$store.dispatch('createAd', ad)
-                }
-
-            }
+          this.$store.dispatch('createAd', ad)
+            .then(() => {
+              this.$router.push('/list')
+            })
+            .catch(() => {})
         }
+
+      }
     }
+  }
 </script>
 
 <style scoped>

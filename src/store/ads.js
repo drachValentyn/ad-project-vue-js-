@@ -4,7 +4,7 @@ class Ad {
     constructor(title, description, ownerId, imageSrc = '', promo = false, id = null){
         this.title = title;
         this.description = description;
-        this.ownerId = ownerId;
+        //this.ownerId = ownerId;
         this.imageSrc = imageSrc;
         this.promo = promo;
         this.id = id
@@ -58,8 +58,14 @@ export default {
                     payload.imageSrc,
                     payload.promo
                 )
-               const fbValue = await firebase.database().ref('ads').push(newAd)
-                console.log(fbValue)
+
+                const ad = await firebase.database().ref('vue-ads-dev').push(newAd)
+                commit('setLoading', false)
+                commit('createAd', {
+                    ...newAd,
+                    id:ad.key
+                })
+
             } catch (error) {
                 commit('setError', error.message)
                 commit('setLoading', false)
