@@ -26,5 +26,7 @@ new Vue({
             }
         })
 
+        this.$store.dispatch('fetchAds')
+
     }
 }).$mount('#app')

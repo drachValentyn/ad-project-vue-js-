@@ -14,28 +14,37 @@
                             :rules="[ v => !!v || 'Title is required']"
                     ></v-text-field>
 
-                    <v-text-field
+                    <v-textarea
                             multi-line
                             name="description"
                             label="Ad Description"
                             type="text"
                             v-model="description"
                             :rules="[ v => !!v || 'Title is required']"
-                    ></v-text-field>
+                    ></v-textarea>
                 </v-form>
 
                 <v-layout row class="mb-3">
                     <v-flex xs12>
-                        <v-btn class="warning">
+
+                        <v-btn class="warning" @click="triggerUpload">
                             Upload Image
                             <v-icon right dark>cloud_upload</v-icon>
                         </v-btn>
+                        <input
+                                ref="fileInput"
+                                type="file"
+                                style="display: none"
+                                accept="image/*"
+                                @change="onFileChange"
+                        >
+
                     </v-flex>
                 </v-layout>
 
                 <v-layout row>
                     <v-flex xs12>
-                        <img src="" alt="" height="100">
+                        <img :src="imageSrc" alt="" height="100" v-if="imageSrc">
                     </v-flex>
                 </v-layout>
 
@@ -54,7 +63,7 @@
                         <v-spacer></v-spacer>
                         <v-btn
                                 :loading="loading"
-                                :disabled="!valid || loading"
+                                :disabled="!valid || !image || loading"
                                 class="success"
                                 @click="CreateAd"
                         >Create Ad
@@ -68,41 +77,58 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        title: '',
-        description: '',
-        promo: false,
-        valid: false
+    export default {
+        data() {
+            return {
+                title: '',
+                description: '',
+                promo: false,
+                valid: false,
+                image: null,
+                imageSrc: '',
 
-      }
-    },
-    computed: {
-      loading () {
-        return this.$store.getters.loading
-      }
-    },
-    methods: {
-      CreateAd () {
-        if (this.$refs.form.validate()) {
-          const ad = {
-            title: this.title,
-            description: this.description,
-            promo: this.promo,
-            imageSrc: 'https://proglib.io/wp-content/uploads/2018/07/1_qnI8K0Udjw4lciWDED4HGw.png'
-          }
+            }
+        },
+        computed: {
+            loading() {
+                return this.$store.getters.loading
+            }
+        },
+        methods: {
+            CreateAd() {
+                if (this.$refs.form.validate() && this.image) {
+                    const ad = {
+                        title: this.title,
+                        description: this.description,
+                        promo: this.promo,
+                        image: this.image
+                    }
 
-          this.$store.dispatch('createAd', ad)
-            .then(() => {
-              this.$router.push('/list')
-            })
-            .catch(() => {})
+                    this.$store.dispatch('createAd', ad)
+                        .then(() => {
+                            this.$router.push('/list')
+                        })
+                        .catch(() => {
+                        })
+                }
+
+            },
+            triggerUpload() {
+                this.$refs.fileInput.click()
+            },
+            onFileChange(event){
+                const file = event.target.files[0]
+
+                const reader = new FileReader()
+                reader.onload = e => {
+                    this.imageSrc = reader.result
+                }
+                reader.readAsDataURL(file)
+                this.image = file
+            }
+
         }
-
-      }
     }
-  }
 </script>
 
 <style scoped>

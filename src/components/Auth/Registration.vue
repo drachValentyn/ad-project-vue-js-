@@ -32,7 +32,7 @@
                             ></v-text-field>
 
                             <v-text-field
-                                    id="password"
+                                    id="confirmPassword"
                                     prepend-icon="lock"
                                     name="confirm-password"
                                     label="Confirm Password"

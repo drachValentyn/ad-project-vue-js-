@@ -2,11 +2,11 @@
     <v-container>
         <v-layout row>
             <v-flex xs12>
-                <v-card>
-                    <v-card-media
+                <v-card v-if="!loading">
+                    <v-img
                             :src="ad.imageSrc"
                             height="300px"
-                    ></v-card-media>
+                    ></v-img>
 
                     <v-card-text>
                         <h1 class="text--primary">{{ ad.title }}</h1>
@@ -15,24 +15,45 @@
 
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn class="warning" flat>Edit</v-btn>
+
+                        <addEditAdModal :ad="ad" v-if="isOwner"></addEditAdModal>
+
                         <v-btn class="success">Buy</v-btn>
                     </v-card-actions>
 
                 </v-card>
+
+                <div v-else class="text-xs-center">
+                    <v-progress-circular
+                            :size="70"
+                            :width="5"
+                            color="purple"
+                            indeterminate
+                    ></v-progress-circular>
+                </div>
             </v-flex>
         </v-layout>
     </v-container>
 </template>
 
 <script>
+    import EditAdModal from './EditAdModal'
     export default {
         props: ['id'],
         computed: {
             ad () {
                 const id = this.id
                 return this.$store.getters.AdById(id)
+            },
+            loading() {
+                return this.$store.getters.loading
+            },
+            isOwner() {
+                return this.ad.ownerId === this.$store.getters.user.id
             }
+        },
+        components: {
+            addEditAdModal: EditAdModal
         }
     }
 </script>

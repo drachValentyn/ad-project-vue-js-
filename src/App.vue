@@ -130,12 +130,11 @@ export default {
                     { title: 'My Ads', icon: 'list', url: '/list'},
                 ]
             }
-            {
-                return [
-                    { title: 'Login', icon: 'lock', url: '/login' },
-                    { title: 'Registration', icon: 'face', url: '/registration'},
-                ]
-            }
+            return [
+                { title: 'Login', icon: 'lock', url: '/login' },
+                { title: 'Registration', icon: 'face', url: '/registration'},
+            ]
+
         }
     },
     methods: {
