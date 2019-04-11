@@ -1,11 +1,24 @@
 import Vue from 'vue'
 import './plugins/vuetify'
+import Vuetify from 'vuetify'
 import App from './App.vue'
 import router from './router/router'
 import store from './store/index'
+import BuyModalComponent from '@/components/Shared/BuyModal'
 import * as firebase from 'firebase'
+import './stylus/main.styl'
+//import colors from 'vuetify/es5/util/colors'
+
 
 Vue.config.productionTip = false
+
+Vue.use(Vuetify, {
+    // theme: {
+    //     primary: colors.green.darken2, // #E53935
+    // }
+})
+
+Vue.component('app-buy-modal', BuyModalComponent)
 
 new Vue({
     router,
