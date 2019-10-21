@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Work 2</title>
+</head>
+<body>
+
+
+<script>
+
+
+
+// function perform (...args1) {
+//   var func1 = args1.pop()
+// 	var result = func1.apply(this, args1)
+
+
+
+//     return{
+//       then: function (...args2) {
+// 			var func2 = args2.pop()
+// 			return perform.apply(this, [...args2, result, func2])
+// 		}
+
+//     }
+//   }
+
+// perform(20, function() {
+//   var param;
+//   console.log(param); // 1
+//   return param =+ 1;
+// })
+// .then('a', 'b', function(a, b, param) {
+//   console.log(++param); // 2
+//   return param;
+// })
+// .then(function(param) { // param === 2
+//   console.log(++param); // 3
+//   return param;
+// });
+
+
+
+
+  let arrNum = [1, 2, 3, 4, 5]
+
+  function arifmArr (arr) {
+
+    let reducer = (accumulator, currentValue) => accumulator + currentValue
+    let reducerFirst = (accumulator) => accumulator
+
+    let summm = arr.reduce(reducer)
+
+    let min = Math.min.apply(null, arr)
+    let max = Math.max.apply(null, arr)
+
+    let first = arr.reduce(reducerFirst)
+    let last = arr.reduceRight(reducerFirst)
+
+
+
+    arr.pop()
+    console.log(arr)
+    arr.push(arr.reduce(reducerFirst)).shift()
+    console.log(arr)
+    arr[0] = last
+    console.log(arr)
+     
+    console.log(last)
+    console.log(first)
+    
+
+    return {
+      arrSum: summm,
+      arrMin: min,
+      arrMax: max,
+      replaceArrow: arr
+    }
+
+  }
+
+  console.log(arifmArr(arrNum));
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
