@@ -2,112 +2,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Work 2</title>
+    <title>Calculator</title>
+    <style>
+
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      input[type="button"] {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+        cursor: pointer;
+        margin: 2px;
+      }
+      .numbers{
+        width: 235px;
+        height: 35px;
+        margin: 10px 5px;
+      }
+    </style>
 </head>
 <body>
 
 
-<script>
 
- //I saw this on one resource and decided to try it here
-    const print = console.log.bind(console);
+<div class="calc-block">
 
-    //Task #1 --- Find in array: sum, min and max, replace min and max - create custom functions
-    let arrNum = [1, 2, 9, 4, 5, 8];
+  <div id="result">
+    <div id="history">
+      <p id="history-value"></p>
+    </div>
+    <div id="output">
+      <p id="output-value"></p>
+    </div>
+  </div>
 
-    function arifmArr(arr) {
+  <table id="keyboard">
 
-        let reducer = (accumulator, currentValue) => accumulator + currentValue;
+    <tr>
+      <td><input type="button" class="number" value="7"></td>
+      <td><input type="button" class="number" value="8"></td>
+      <td><input type="button" class="number" value="9"></td>
+      <td><input type="button" class="operator" id="/" value="/"></td>
+      <td><input type="button" class="operator" id="backspace" value="CE"></td>
+      <td><input type="button" class="operator" id="clear" value="C"></td>
+    </tr>
 
-        let summ = arr.reduce(reducer);
+    <tr>
+      <td><input type="button" class="number" value="4"></td>
+      <td><input type="button" class="number" value="5"></td>
+      <td><input type="button" class="number" value="6"></td>
+      <td><input type="button" class="operator" value="*" id="*"></td>
+      <td><input type="button" class="operator" value="&#8730;" id="sq_root"></td>
+    </tr>
 
-        let min = Math.min.apply(null, arr);
-        let max = Math.max.apply(null, arr);
+    <tr>
+      <td><input type="button" class="number" value="1"></td>
+      <td><input type="button" class="number" value="2"></td>
+      <td><input type="button" class="number" value="3"></td>
+      <td><input type="button" value="-" class="operator" id="-"></td>
+      <td><input type="button" value="x²" class="operator" id="sq"></td>
+    </tr>
 
-        let indexMin = arr.indexOf(min);
-        let indexMax = arr.indexOf(max);
-
-        arr[indexMin] = max;
-        arr[indexMax] = min;
-
-        let final = {
-            arrSum: summ,
-            arrMin: min,
-            arrMax: max,
-            replaceMinMax: arr
-        };
-        print(final);
-
-        return final;
-    }
-
-    //arifmArr(arrNum);
-
-
-    //Task #2 --- Create function which will return function with callback in arguments
-    function funcCall(param1, param2) {
-        print(param1 + " and " + param2);
-        return function (callback, params) {
-            callback.apply(this, params);
-        }
-    }
-
-    //funcCall( "hello", "goodbye");
-
-
-    //Task #3 --- Create a function that will replace all number dividing three with ‘foo’, dividing seven with ‘bar’ and dividing three and seven with ‘foobar’. Function with n params.
-    function fooBar(...args) {
-        let length = args[0] || 100;
-        let fooNum = args[1] || 3;
-        let barNum = args[2] || 7;
-        let output;
-        for (let i = 1; i <= length; i++) {
-            output = '';
-            if (i % fooNum === 0) {
-                output += 'Fizz';
-            }
-            if (i % barNum === 0) {
-                output += 'Buzz';
-            }
-            if (i % fooNum !== 0 && i % barNum !== 0) {
-                output += i;
-            }
-            print(output);
-        }
-    }
-
-    //fooBar(140,'',5,5,5,)
+    <tr>
+      <td><input type="button" class="number" value="0"></td>
+      <td><input type="button" value="," class="operator"  id=","></td>
+      <td><input type="button" value="%" class="operator"  id="%"></td>
+      <td><input type="button" value="+"  class="operator" id="+"></td>
+      <td><input type="button" value="=" class="operator" id="="></td>
+    </tr>
 
 
-    //Task #4 --- Create function with 2 string params. It must check if letters in the first correspond to the number of matches in second and return %.
-    function twoStrings(str1, str2) {
+  </table>
 
-        let str1Length = str1.length;
-        let str2Length = str2.length;
-
-        let minLength = (str1Length > str2Length) ? str2Length : str1Length;
-        let maxLength = (str1Length < str2Length) ? str2Length : str1Length;
-        let counter = 0;
-
-        for (let i = 0; i < minLength; i++) {
-            if (str1[i] === str2[i]) {
-                counter++;
-            }
-        }
-
-        let result = Math.round((counter / maxLength) * 100) + "%";
-        print(result);
-
-        return result;
-
-    }
-
-    //twoStrings("Lorem Ipsum","Lorem ipsum");
+</div>
 
 
-
-
-</script>
+<script src="script.js"></script>
 
 
 </body>
