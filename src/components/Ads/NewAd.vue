@@ -12,7 +12,7 @@
                             v-model="title"
                             required
                             :rules="[ v => !!v || 'Title is required']"
-                    ></v-text-field>
+                    />
 
                     <v-textarea
                             multi-line
@@ -21,7 +21,7 @@
                             type="text"
                             v-model="description"
                             :rules="[ v => !!v || 'Title is required']"
-                    ></v-textarea>
+                    />
                 </v-form>
 
                 <v-layout row class="mb-3">
@@ -54,16 +54,16 @@
                                 color="primary"
                                 v-model="promo"
                                 label="Add to Promo"
-                        ></v-switch>
+                        />
                     </v-flex>
                 </v-layout>
 
                 <v-layout row>
                     <v-flex xs12>
-                        <v-spacer></v-spacer>
+                        <v-spacer/>
                         <v-btn
                                 :loading="loading"
-                                :disabled="!valid || !image || loading"
+                                :disabled="!valid || loading"
                                 class="success"
                                 @click="CreateAd"
                         >Create Ad
@@ -77,6 +77,8 @@
 </template>
 
 <script>
+    import * as firebase from 'firebase'
+
     export default {
         data() {
             return {
@@ -86,7 +88,6 @@
                 valid: false,
                 image: null,
                 imageSrc: '',
-
             }
         },
         computed: {
@@ -101,29 +102,35 @@
                         title: this.title,
                         description: this.description,
                         promo: this.promo,
-                        image: this.image
-                    }
+                        image: this.image,
+                    };
 
+                    //const Ad = firebase.database().ref('vue-ads-dev').push(ad)
+                    console.log(ad)
                     this.$store.dispatch('createAd', ad)
                         .then(() => {
-                            this.$router.push('/list')
+                            const id = this.$store.getters.ads;
+                            const last = id.pop();
+                            console.log(last.id)
+
+                            //this.$router.push('/list')
                         })
                         .catch(() => {
                         })
                 }
 
             },
-            triggerUpload() {
+             triggerUpload() {
                 this.$refs.fileInput.click()
             },
             onFileChange(event){
-                const file = event.target.files[0]
+                const file = event.target.files[0];
 
-                const reader = new FileReader()
+                const reader = new FileReader();
                 reader.onload = e => {
                     this.imageSrc = reader.result
-                }
-                reader.readAsDataURL(file)
+                };
+                reader.readAsDataURL(file);
                 this.image = file
             }
 

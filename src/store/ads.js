@@ -46,16 +46,17 @@ export default {
                     payload.promo
                 )
 
-                const ad = await firebase.database().ref('vue-ads-dev').push(newAd)
+                const ad = await firebase.database().ref('vue-ads-dev').push(newAd);
+
+                console.log(ad.key);
+
                 const imageExt = image.name.slice(image.name.lastIndexOf('.'))
 
 
                 const fileData = await firebase.storage().ref(`ads/${ad.key}${imageExt}`).put(image)
                 const imageSrc = await fileData.ref.getDownloadURL()
 
-                await firebase.database().ref('vue-ads-dev').child(ad.key).update({
-                    imageSrc
-                })
+                await firebase.database().ref('vue-ads-dev').child(ad.key).update({imageSrc})
 
                 commit('setLoading', false)
                 commit('createAd', {
@@ -79,9 +80,9 @@ export default {
 
             try {
                 const fbValue = await firebase.database().ref('vue-ads-dev').once('value')
-                const ads = fbValue.val()
+                const ads = fbValue.val();
 
-
+                //console.log(ads);
                 Object.keys(ads).forEach(key => {
                     const ad = ads[key]
                     resultAds.push(

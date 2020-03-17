@@ -15,7 +15,7 @@
                             <v-img
                                     :src="ad.imageSrc"
                                     height="160px"
-                            ></v-img>
+                            />
                         </v-flex>
 
                         <v-flex xs8>

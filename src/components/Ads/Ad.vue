@@ -6,7 +6,7 @@
                     <v-img
                             :src="ad.imageSrc"
                             height="300px"
-                    ></v-img>
+                    />
 
                     <v-card-text>
                         <h1 class="text--primary">{{ ad.title }}</h1>
@@ -14,11 +14,11 @@
                     </v-card-text>
 
                     <v-card-actions>
-                        <v-spacer></v-spacer>
+                        <v-spacer/>
 
-                        <addEditAdModal :ad="ad" v-if="isOwner"></addEditAdModal>
+                        <addEditAdModal :ad="ad" v-if="isOwner"/>
 
-                        <app-buy-modal :ad="ad"></app-buy-modal>
+                        <app-buy-modal :ad="ad"/>
                     </v-card-actions>
 
                 </v-card>
@@ -29,7 +29,7 @@
                             :width="5"
                             color="purple"
                             indeterminate
-                    ></v-progress-circular>
+                    />
                 </div>
             </v-flex>
         </v-layout>

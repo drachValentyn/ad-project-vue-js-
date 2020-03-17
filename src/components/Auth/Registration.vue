@@ -18,7 +18,7 @@
                                     v-model="email"
                                     :rules="emailRules"
                                     required
-                            ></v-text-field>
+                            />
 
                             <v-text-field
                                     id="password"
@@ -29,7 +29,7 @@
                                     :counter="6"
                                     :rules="passRules"
                                     v-model="password"
-                            ></v-text-field>
+                            />
 
                             <v-text-field
                                     id="confirmPassword"
@@ -40,7 +40,7 @@
                                     :counter="6"
                                     :rules="confirmPassRules"
                                     v-model="confirmPassword"
-                            ></v-text-field>
+                            />
                         </v-form>
                     </v-card-text>
 

@@ -32,7 +32,7 @@
                         <v-img
                                 :src="ad.imageSrc"
                                 aspect-ratio="2.75"
-                        ></v-img>
+                        />
 
                         <v-card-title primary-title>
                             <div>
@@ -42,9 +42,9 @@
                         </v-card-title>
 
                         <v-card-actions>
-                            <v-spacer></v-spacer>
+                            <v-spacer/>
                             <v-btn flat :to="'/ad/' + ad.id">Open</v-btn>
-                            <app-buy-modal :ad="ad"></app-buy-modal>
+                            <app-buy-modal :ad="ad"/>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -61,7 +61,7 @@
                             :width="4"
                             color="purple"
                             indeterminate
-                    ></v-progress-circular>
+                    />
                 </v-flex>
             </v-layout>
         </v-container>

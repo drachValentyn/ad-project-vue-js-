@@ -18,7 +18,7 @@
                                     v-model="email"
                                     :rules="emailRules"
                                     required
-                            ></v-text-field>
+                            />
 
                             <v-text-field
                                     id="password"
@@ -30,12 +30,12 @@
                                     :rules="passRules"
                                     v-model="password"
                                     required
-                            ></v-text-field>
+                            />
                         </v-form>
                     </v-card-text>
 
                     <v-card-actions>
-                        <v-spacer></v-spacer>
+                        <v-spacer/>
                         <v-btn
                                 color="primary"
                                 @click="onSubmit"
